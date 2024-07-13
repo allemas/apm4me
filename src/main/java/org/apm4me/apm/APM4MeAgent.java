@@ -3,10 +3,14 @@ package org.apm4me.apm;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
-import org.apm4me.Premain;
-import org.apm4me.instrumentation.InstrumentMethodTimer;
+import org.apm4me.instrumentation.LogBytecodeInstrumenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.PrintStream;
+
+import static net.bytebuddy.agent.builder.AgentBuilder.RedefinitionStrategy.RETRANSFORMATION;
+import static net.bytebuddy.matcher.ElementMatchers.*;
 
 public class APM4MeAgent {
 
@@ -14,18 +18,22 @@ public class APM4MeAgent {
 
     public static net.bytebuddy.agent.builder.AgentBuilder install() {
         ClassLoader loader = APM4MeAgent.class.getClassLoader();
-        logger.info("Start instrumentation");
+        logger.info("Start instrumentation with retransformation");
 
         return new net.bytebuddy.agent.builder.AgentBuilder.Default()
-                .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
-                //  .with(net.bytebuddy.agent.builder.AgentBuilder.Listener.StreamWriting.toSystemError())
-                .type(ElementMatchers.nameContains("AddMethod"))
-                //  .type(ElementMatchers.any())
+                .disableClassFormatChanges()
+                .with(RETRANSFORMATION)
+                .with(AgentBuilder.RedefinitionStrategy.Listener.StreamWriting.toSystemError())
+                .with(AgentBuilder.InstallationListener.StreamWriting.toSystemError())
+                .ignore(none())
+                .type(is(PrintStream.class))
                 .transform((builder, typeDescription, classLoader, module) ->
-                        builder.method(ElementMatchers.any())
-                                .intercept(Advice.to(InstrumentMethodTimer.class))
+                    builder.visit(Advice.to(LogBytecodeInstrumenter.class)
+                            .on(ElementMatchers.named("println"))
+                     )
                 )
                 ;
     }
+
 
 }

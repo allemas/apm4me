@@ -1,0 +1,14 @@
+version: 0.7 # File format version.
+
+index_id: stackoverflow
+
+doc_mapping:
+  field_mappings:
+    - name: body
+      type: text
+      tokenizer: default
+      record: position
+
+
+search_settings:
+  default_search_fields: [body]

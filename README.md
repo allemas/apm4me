@@ -22,3 +22,16 @@ This is not the first project I've done on APMs and JVM Internal. It follows on 
 - Export flamegraph on a port : not totally adone
   - this should come with concept and explanations 
 - Instrumentation example: log appender to quickwit : not started
+
+
+## QuickWit println interceptor !
+
+❯ docker run --rm --platform linux/amd64 -v $(pwd)/qwdata:/quickwit/qwdata -p 127.0.0.1:7280:7280 quickwit/quickwit run
+❯ curl -XPOST http://127.0.0.1:7280/api/v1/indexes --header "content-type: application/yaml" --data-binary @<>/apm4me/quickwit-index.yaml
+❯ curl "http://127.0.0.1:7280/api/v1/stackoverflow/search?query=*"
+❯ java -javaagent:/Users/sebastienallemand/Documents/apm4me/target/apm-1.0-SNAPSHOT-jar-with-dependencies.jar -jar ./target/emptyProject-1.0-SNAPSHOT.jar
+
+
+## Interesting to read
+- redefining VS rebase : https://github.com/raphw/byte-buddy/issues/996
+- SuperMethodCall for overriden methods with a covariant return type https://github.com/raphw/byte-buddy/issues/1311
