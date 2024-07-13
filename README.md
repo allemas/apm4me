@@ -21,4 +21,4 @@ This is not the first project I've done on APMs and JVM Internal. It follows on 
   Actually not really done, method calling is traced correctly, but not in a tracing context. _without specific class instrumentation maybe not possible_
 - Export flamegraph on a port : not totally adone
   - this should come with concept and explanations 
-- Instrumentation example: log appender to quickwit.
+- Instrumentation example: log appender to quickwit : not started
