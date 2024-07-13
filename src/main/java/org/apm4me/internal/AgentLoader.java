@@ -1,4 +1,4 @@
-package org.apm4me;
+package org.apm4me.internal;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
@@ -9,24 +9,7 @@ public class AgentLoader {
 
     public static void agentmain(String argument,
                                  Instrumentation instrumentation) throws UnmodifiableClassException {
+        long heapSize = Runtime.getRuntime().totalMemory();
 
-        instrumentation.addTransformer(new ClassFileTransformer() {
-            @Override
-            public byte[] transform(Module module,
-                                    ClassLoader loader,
-                                    String name,
-                                    Class<?> typeIfLoaded,
-                                    ProtectionDomain domain,
-                                    byte[] buffer) {
-                if (typeIfLoaded == null) {
-                    System.out.println("Class was loaded: " + name);
-                } else {
-                    System.out.println("Class was re-loaded: " + name);
-                }
-                return null;
-            }
-        }, true);
-        instrumentation.retransformClasses(
-                instrumentation.getAllLoadedClasses());
     }
 }

@@ -1,4 +1,4 @@
-package org.apm4me.apm;
+package org.apm4me.internal;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;

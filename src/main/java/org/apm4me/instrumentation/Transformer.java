@@ -1,10 +1,8 @@
-package org.apm4me.apm;
+package org.apm4me.instrumentation;
 
-import javassist.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
 

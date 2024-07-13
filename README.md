@@ -17,7 +17,7 @@ This is not the first project I've done on APMs and JVM Internal. It follows on 
 - Understand bytebuddy and how it's works: OK
 - Export basic metrics from the JVM : src/main/java/org/apm4me/instrumentation/JMXMetricsUtils.java
 - Linking OTEL SDK by retransformation instrumentation : OK
-- Create **native** tracing context and trace all method called in the applicaiton :
+- Create **native** tracing context and trace all method called in the application :
   Actually not really done, method calling is traced correctly, but not in a tracing context. _without specific class instrumentation maybe not possible_
 - Export flamegraph on a port : not totally adone
   - this should come with concept and explanations 

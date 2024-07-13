@@ -1,4 +1,4 @@
-package org.apm4me.apm;
+package org.apm4me.instrumentation;
 
 import java.lang.instrument.Instrumentation;
 import java.lang.management.*;

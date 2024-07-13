@@ -1,6 +1,7 @@
 package org.apm4me;
 
 import com.sun.tools.attach.VirtualMachine;
+import io.opentelemetry.sdk.resources.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,16 +14,11 @@ public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws Exception {
-        System.out.println("???");
-        System.out.println("???");
-        System.out.println("???");
-        System.out.println("???");
-        System.out.println("???");
-
-        String pid = args[0];
+        logger.info("launch APM with agent VM");
+  //      String pid = args[0];
         String options = "";
         if (args.length > 1) options = args[1];
-        loadAgent(pid, options);
+      //  loadAgent(pid, options);
     }
 
 
